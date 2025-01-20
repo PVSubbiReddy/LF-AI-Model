@@ -1,6 +1,12 @@
+# Lorest rates for personal loans?"
+"""
+TODO
+Have to implement db changes
+
+"""
+
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-# Lorest rates for personal loans?"
 
 Example Response:
 "Dear Customer, Thank you for your inquiry. You can check your loan application status through the LoanFront app or website. If you have further questions, feel free to reach out. Sincerely, LoanFront"
