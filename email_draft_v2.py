@@ -9,10 +9,10 @@ load_dotenv()
 api_keys = [
     os.environ["API_1"],
     os.environ["API_2"],
-    os.environ["API_3"],
-    os.environ["API_4"],
-    os.environ["API_5"],
-    os.environ["API_6"],
+   #  os.environ["API_3"],
+   #  os.environ["API_4"],
+   #  os.environ["API_5"],
+   #  os.environ["API_6"],
 ]
 
 key_cycle = cycle(api_keys)
@@ -21,7 +21,7 @@ def response(query):
 
     customer_message = query
     completion = client.chat.completions.create(
-        model="llama-3.2-90b-vision-preview",
+        model="llama-3.3-70b-versatile",   #llama-3.3-70b-versatile  #llama-3.2-90b-vision-preview
         messages=[
             {
                 "role": "system",
@@ -76,8 +76,9 @@ def response(query):
                     19. **Strictly ignore the following message if it appears in the email:**
                        - "To unsubscribe from this group and stop receiving emails from it, send an email to support+unsubscribe@loanfront.in."
                        - This message is automatically added by a third-party provider and should not trigger any response or explanation.
-                  20. Never aggree that harassment has done from our end, tell that we will follow collection policies strictly.
-                  
+                    20. Never aggree that harassment has done from our end, tell that we will follow collection policies strictly, and inform that anyhow we will conduct an internal investigation on this and ask the customer to share anykind of details related to harassment.
+                    21. When customer is requesting/demanding an extra time for the repayment reply very carefully
+                    
                     **Examples:**
                     1. Query: "Why is my interest rate so high?"
                        Response: "Dear Customer, your interest rate is based on your credit profile. Contact us for details. Sincerely, LoanFront.
