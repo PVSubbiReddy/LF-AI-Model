@@ -1,8 +1,10 @@
 import streamlit as st
 from email_draft_v2 import response
 from collections_help import collections_response
+from general_topics import general_response
 import os
 import base64
+import asyncio
 
 
 def load_base64_image(image_path):
@@ -45,7 +47,7 @@ st.markdown(
 
 # Password mapping for categories
 passwords = {
-    "Collections": "Cap@321",
+    "Collections": "Vai@321",
     "Email Support": "Vai@123",
     "Quality": "Lf@54321"
 }
@@ -95,8 +97,9 @@ elif selected_option == "Collections" and authenticated:
     st.markdown(
         f"""Welcome to the LoanFront Support Assistant. You can generate {selected_option} templates here. <br><br>
         How to use :- <br>
+        <span style='color:#FFE100;-webkit-text-stroke: 0.0090px black;'>
         * Example:- Generate a template for 23 DPD customer who is giving fake commitments daily.<br>
-        * Example:- Customer is not at all ready to pay even after 3 months, how can i convince him? 
+        * Example:- Customer is not at all ready to pay even after 3 months, how can i convince him? </span>
         <br><br>
         Note: 
         <br>1) You can use this module only for {selected_option} related queries in the way as mentioned above. Please change the category for a different one.<br>{common_prompts}"""
@@ -137,7 +140,9 @@ if not password_protected or authenticated:
                 try:
                     responses = None
                     if selected_option == "Collections":
-                        responses = collections_response(clean_query)
+                        responses = asyncio.run(collections_response(clean_query))
+                    elif selected_option == "General Inquiries":
+                        responses = asyncio.run(general_response(clean_query))
                     elif selected_option == "Email Support":
                         responses = response(clean_query)
                     elif selected_option == "Quality":

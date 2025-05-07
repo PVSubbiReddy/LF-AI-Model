@@ -1,14 +1,9 @@
 import asyncio
 from huggingface_hub import InferenceClient
 from aiogoogletrans import Translator
-from dotenv import load_dotenv
-import os
 
-
-load_dotenv()
-
-async def collections_response(query):
-    client = InferenceClient(api_key=os.environ["HF_1"])
+async def response(query):
+    client = InferenceClient(api_key="HF_1")
     customer_message = query
     translator = Translator()
 
@@ -124,10 +119,10 @@ async def collections_response(query):
     # Output the result
     if found_wrd != "":
         translated = await translator.translate(full_response, src='en', dest=indian_languages[found_wrd])
-        return translated.text
+        print(translated.text)
     else:
         print("The string does not contain any of the specified languages.")
-        return full_response
+        print(full_response)
 
 # Run the async function
-asyncio.run(collections_response("generate a template in for 100 dpd in high tone"))
+asyncio.run(response("generate a template in for 100 dpd in high tone"))
