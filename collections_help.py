@@ -84,7 +84,7 @@ async def collections_response(query):
     ]
 
     stream = client.chat.completions.create(
-        model="codellama/CodeLlama-34b-Instruct-hf", 
+        model="meta-llama/Llama-3.3-70B-Instruct", 
         messages=messages, 
         temperature=0.65,
         max_tokens=2048,
@@ -92,7 +92,8 @@ async def collections_response(query):
         stream=True
     )
     
-    print("got response")
+    print("got responsecoll")
+    print(query)
     full_response = ""
     for chunk in stream:
         if chunk.choices[0].delta.content:
@@ -130,4 +131,4 @@ async def collections_response(query):
         return full_response
 
 # Run the async function
-asyncio.run(collections_response("generate a template in for 100 dpd in high tone"))
+# asyncio.run(collections_response("generate a template in for 100 dpd in high tone"))

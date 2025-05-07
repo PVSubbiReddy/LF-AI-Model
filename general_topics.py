@@ -113,11 +113,13 @@ async def general_response(query):
                                 6. **Out-of-Scope Query:**
                                 - Employee: *"Tell me about the weather today."*
                                 - AI Response: *"I’m here to assist with office-related queries. For personal or non-work-related questions, please reach out to the appropriate department."*
-
+                                **Employees may send messages which they received from someone related to work/leaves/enquiry. So they will give that message to you, and they will tell what kind of response they wanted to send back, professionally frame the sentence and give to them. This should look like that employee is replying, not like a bot side reply**
+                                **Generate messages as reply from employees POV not as a BOT POV**
+                                **Think Points logically, for example employee asking you that he wanted to take a leave on some day, but if its a holiday(you can check in the calender provided), then inform him its a holiday already. So think in this way.
                                 ---
 
                                 **Note:**
-                                Your primary role is to assist LoanFront employees with professional, office-related inquiries and provide accurate information based on the 2025 Holiday Calendar. Always maintain a professional tone and ensure responses are relevant to the workplace.
+                                Your primary role is to assist LoanFront employees with professional, office-related inquiries and provide accurate information based on the 2025 Holiday Calendar. Always maintain a professional tone and ensure responses are relevant to the workplace. Help them in what they are asking which are in your boundaries. Do not give any suggestions or information which are out of your boundaries.**
                                 """
         },
         {
@@ -127,7 +129,8 @@ async def general_response(query):
     ]
 
     stream = client.chat.completions.create(
-        model="deepseek-ai/DeepSeek-R1-Distill-Qwen-32B", 
+        model="nvidia/Llama-3.1-Nemotron-70B-Instruct-HF",
+        #model="deepseek-ai/DeepSeek-R1-Distill-Qwen-32B", 
         messages=messages, 
         temperature=0.5,
         max_tokens=2048,
@@ -135,11 +138,11 @@ async def general_response(query):
         stream=True
     )
     
-    print("got response")
+    print("got response gen")
     full_response = ""
     for chunk in stream:
         if chunk.choices[0].delta.content:
             full_response += chunk.choices[0].delta.content
     
     final_response = full_response.split("</think>")
-    return final_response[1]
+    return final_response[0]
