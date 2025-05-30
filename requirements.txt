@@ -3,3 +3,4 @@ streamlit
 python-dotenv
 huggingface-hub
 aiogoogletrans
+ffmpeg-python
