@@ -2,6 +2,7 @@ import streamlit as st
 from email_draft_v2 import response
 from collections_help import collections_response
 from general_topics import general_response
+from quality import quality
 import os
 import base64
 import asyncio
@@ -49,7 +50,7 @@ st.markdown(
 passwords = {
     "Collections": "Vai@321",
     "Email Support": "Vai@123",
-    "Quality": "Lf@54321"
+    "Quality": "vvpl"
 }
 
 # Check if the category is password-protected
@@ -158,6 +159,11 @@ if not password_protected or authenticated:
                     st.error(f"Error generating response: {e}")
         else:
             st.warning("Please enter a query before submitting.")
+            
+if selected_option == "Quality" and authenticated:
+    quality()
+             
+    
 
 st.markdown("---")
 st.markdown("""Powered by <span style='color:#FFE100;-webkit-text-stroke: 0.0090px black;'>LoanFront AI.</span>""",unsafe_allow_html=True)
